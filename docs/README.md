@@ -123,7 +123,7 @@ This project leverages the following OSS:
 
 ---
 
-Made with 💡 and ⚙️ by **Your Team Name**
+Made with 💡 and ⚙️ by **42X007**
 
 ---
 
