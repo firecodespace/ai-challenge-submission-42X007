@@ -1,41 +1,139 @@
-### **Important Instructions**:  
-- Click on *"Use this template"* button and *"Create a new repository"* in your github account for submission.
-<img width="1262" height="93" alt="Screenshot 2025-08-15 at 5 59 49 AM" src="https://github.com/user-attachments/assets/b72d5afd-ba07-4da1-ac05-a373b3168b6a" />
+<!-- Banner / Hero -->
+<p align="center">
+  <img src="docs/banner.gif" alt="PrismBot Hero" width="900"/>
+</p>
 
-- Add one of the following open source licenses - [MIT](https://opensource.org/licenses/MIT), [Apache 2.0](https://opensource.org/licenses/Apache-2.0) or [BSD 3-Clause](https://opensource.org/licenses/BSD-3-Clause) to your submission repository. 
-- Once your repository is ready for **evaluation** send an email to ennovatex.io@samsung.com with the subject - "AI Challenge Submission - Team name" and the body of the email must contain only the Team Name, Team Leader Name & your GitHub project repository link.
-- All submission project materials outlined below must be added to the github repository and nothing should be attached in the submission email.
-- In case of any query, please feel free to reach out to us at ennovatex.io@samsung.com
+<h1 align="center">PrismBot — AI-Powered On‑Device Chatbot</h1>
+<p align="center">
+  Privacy-first • Adapter‑driven • Smart fine‑tuning • Mobile‑ready
+</p>
 
-#### Evaluation Criteria
+<p align="center">
+  <a href="https://samsung-prism-frontend.vercel.app/chatbot">
+    <img src="https://img.shields.io/badge/Live_Demo-Vercel-000000?logo=vercel" />
+  </a>
+  <img src="https://img.shields.io/badge/Frontend-Next.js-000?logo=next.js" />
+  <img src="https://img.shields.io/badge/Backend-FastAPI-009688?logo=fastapi" />
+  <img src="https://img.shields.io/badge/Models-LLAMA--family-FF6B6B" />
+  <img src="https://img.shields.io/badge/Tunnel-Ngrok-FE49A1?logo=ngrok" />
+  <img src="https://img.shields.io/badge/Style-Tailwind%20CSS-38B2AC?logo=tailwindcss" />
+</p>
 
-| Project Aspect | % |
-| --- | --- |
-| Novelty of Approach | 25% |
-| Technical implementation & Documentation | 25% |
-| UI/UX Design or User Interaction Design | 15% |
-| Ethical Considerations & Scalability | 10% |
-| Demo Video (10 mins max) | 25% |
+---
 
-**-------------------------- Your Project README.md should start from here -----------------------------**
+## ✨ Overview
 
-# Samsung EnnovateX 2025 AI Challenge Submission
+PrismBot is an Active AI Powered Android Monitoring Overlay System that runs the LLAMA language model **fully on‑device**, keeping conversations and personal data private while delivering real‑time assistance through a sleek chat interface and **overlay mode**. Adapters enable instant role switching (study helper, coding buddy, travel guide, wellness coach), and **smart fine‑tuning** updates these adapters automatically when the device is idle/charging for an increasingly personalized experience.
 
-- **Problem Statement** - *(Must exactly match one of the nine Samsung EnnovateX AI Challenge Problem Statements)*
-- **Team name** - *(As provided during the time of registration)*
-- **Team members (Names)** - *Member 1 Name*, *Member 2 Name*, *Member 3 Name*, *Member 4 Name* 
-- **Demo Video Link** - *(Upload the Demo video on Youtube as a public or unlisted video and share the link. Google Drive uploads or any other uploads are not allowed.)*
+<p align="center">
+  <img src="docs/skeleton-demo.gif" alt="Responding skeleton" width="500"/>
+</p>
 
+---
 
-### Project Artefacts
+## 🧩 Why PrismBot?
 
-- **Technical Documentation** - [Docs](docs) *(All technical details must be written in markdown files inside the docs folder in the repo)*
-- **Source Code** - [Source](src) *(All source code must be added to the src folder in the repo. The code must be capable of being successfully installed/executed and must run consistently on the intended platforms.)*
-- **Models Used** - *(Hugging Face links to all models used in the project. You are permitted to use open weight models.)*
-- **Models Published** - *(In case you have developed a model as a part of your solution, kindly upload it on Hugging Face under appropriate open source license and add the link here.)*
-- **Datasets Used** - *(Links to all datasets used in the project. You are permitted to use publicly available datasets under licenses like Creative Commons, Open Data Commons, or equivalent.)*
-- **Datasets Published** - *(Links to all datasets created for the project and published on Hugging Face. You are allowed to publish any synthetic or proprietary dataset used in their project, but will be responsible for any legal compliance and permission for the same. The dataset can be published under Creative Commons, Open Data Commons, or equivalent license.)*
+- Adapters for flexible roles (study, code, travel, wellness)  
+- Smart background fine‑tuning during idle/charging  
+- Overlay assistant available across apps  
+- Strict on‑device privacy and encrypted storage  
+- Mobile‑first UI with animated “Responding…” skeleton feedback
 
-### Attribution 
+---
 
-In case this project is built on top of an existing open source project, please provide the original project link here. Also, mention what new features were developed. Failing to attribute the source projects may lead to disqualification during the time of evaluation.
+## 🏗️ Architecture
+
+<p align="center">
+  <img src="docs/architecture.png" alt="System Architecture" width="900"/>
+</p>
+
+- Vercel‑hosted Next.js frontend calls the backend via a secure **Ngrok** HTTPS tunnel.  
+- Local **FastAPI** backend orchestrates requests to on‑device **LLAMA** runner (Ollama/llama.cpp).  
+- **Adapters** apply parameter‑efficient specialization; a **fine‑tuning worker** updates adapters when idle/charging.  
+- All user data stays on device; personas are sandboxed to prevent cross‑contamination.
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|------|------------|
+| Frontend | Next.js, React, TypeScript, Tailwind CSS |
+| Backend | FastAPI (Python) |
+| Model Runner | llama.cpp / Ollama APIs |
+| Fine‑Tuning | LoRA / QLoRA / Unsloth |
+| Access & Overlay | Android Accessibility Service, Web Workers |
+| Dev/Infra | Vercel, Ngrok |
+
+---
+
+## ⚙️ Setup & Run
+
+### 1) Backend (Local)
+cd src/backend
+python -m venv .venv && source .venv/bin/activate # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn main:app --host 127.0.0.1 --port 8000
+
+### 2) Tunnel (Ngrok)
+ngrok http 8000
+copy the HTTPS forwarding URL, e.g. https://<id>.ngrok-free.app
+
+### 3) Frontend
+- In Vercel project settings, set:
+  - `NEXT_PUBLIC_MOBILE_API_BASE = https://<your-ngrok>.ngrok-free.app`
+  - cd src/frontend
+  - npm install
+  - npm run dev # local test
+ 
+
+---
+
+## 📖 User Guide
+
+1. Open the web app and start chatting.  
+2. Watch the animated “Responding…” skeleton as the assistant thinks.  
+3. Enable **Overlay Mode** to float chat over other apps (Android).  
+4. Switch roles with Adapters (study, code, travel, wellness).  
+5. Fine‑tuning improves active adapters automatically when idle/charging.
+
+<p align="center">
+  <img src="docs/chat-demo.gif" alt="Chat UX Demo" width="700"/>
+</p>
+
+---
+
+## 🔐 Privacy & Ethics
+
+- 100% on‑device inference and storage  
+- No cloud data transfer required  
+- Adapter/persona isolation prevents cross‑context leakage  
+- Background jobs respect battery/thermal constraints
+
+---
+
+## 📚 Documentation
+
+- Approach & Architecture: `docs/architecture-overview.md`  
+- Technical Details: `docs/technical-docs.md`  
+- Installation: `docs/installation-guide.md`  
+- User Guide: `docs/user-guide.md`  
+- Features: `docs/salient-features.md`
+
+---
+
+## 🧾 Attribution
+
+- Next.js • FastAPI • Tailwind • Ngrok  
+- LLAMA family (via llama.cpp / Ollama)  
+- LoRA / QLoRA / Unsloth for PEFT  
+- Thanks to the OSS community
+
+---
+
+## 🎬 Demo Video
+[![Watch the Demo](docs/demo-thumbnail.png)](https://youtu.be/your-demo-video)
+
+<p align="center">
+  <sub>Built for <b>Samsung EnnovateX 2025 AI Challenge</b> — privacy‑first, adapter‑driven, and beautifully fast.</sub>
+</p>
