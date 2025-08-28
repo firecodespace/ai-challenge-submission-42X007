@@ -126,5 +126,3 @@ This project leverages the following OSS:
 Made with 💡 and ⚙️ by **42X007**
 
 ---
-
-Feel free to ask if you want me to generate your `/docs/*.md` files or help prepping visuals and GIFs for this too!
