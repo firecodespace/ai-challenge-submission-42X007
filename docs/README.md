@@ -89,13 +89,6 @@ The app also features **smart fine-tuning** which updates active adapters automa
 
 ![Skeleton Loading Demo](docs/skeleton-demo.gif)
 
----
-
-## 📽️ Demo Video
-
-[![Watch Demo](docs/demo-thumbnail.png)](https://youtu.be/your-demo-video-link)
-
----
 
 ## ⚠️ Ethical Considerations & Scalability
 
